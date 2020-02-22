@@ -1,0 +1,79 @@
+<div class="container-fluid">
+        <div class="row" [formGroup]="leaveForm">
+            <div class="col-6 border-right">
+               <h5 class="primery-color p-2 text-uppercase">Apply Leave</h5>
+                <p *ngIf="savedMsg">
+                    <ngb-alert>
+                       Successully Saved!
+                    </ngb-alert>
+                </p>
+               <div class="p-4">
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-4 col-form-label text-uppercase">Leave Type <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                        <select class="form-control" formControlName="leaveType" id="sel1">
+                            <option value="">Select Leave Type</option>
+                            <option *ngFor="let leaveType of leaveTypeData" [value]="leaveType.id" >{{leaveType.leaveCategory}}</option>
+                        </select>
+                        <span *ngIf="(leaveForm.get('leaveType').value == '' && leaveForm.get('leaveType').touched) || (isSubmitted && leaveForm.get('leaveType').invalid)" class="invalid-feedback text-danger d-block ">
+                                Enter the leave type
+                        </span>
+                    </div>
+                </div>
+            <div class="form-group row">
+                    <label for="noOfLeave" class="col-sm-4 col-form-label text-uppercase">No Of Leave <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                        <input type="number" formControlName="noOfLeave"  class="form-control" id="noOfLeave" placeholder="No Of Leave">
+                        <span *ngIf="(leaveForm.get('noOfLeave').value == '' && leaveForm.get('noOfLeave').touched) || (isSubmitted && leaveForm.get('noOfLeave').invalid)" class="invalid-feedback text-danger d-block ">
+                            Enter The No Of Leave
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label text-uppercase">Approver <span class="text-danger">*</span></label>
+                        <div class="col-sm-8">
+                            <select class="form-control" formControlName="approver" id="sel1">
+                                <option value="">Select Approver</option>
+                                <option *ngFor="let user of userData" [disabled]="loggedUser.id == user.id" [value]="user.id" >{{user.name}}</option>
+                            </select>
+                            <span *ngIf="(leaveForm.get('approver').value == '' && leaveForm.get('approver').touched) || (isSubmitted && leaveForm.get('approver').invalid)" class="invalid-feedback text-danger d-block">
+                                    Enter the approver
+                            </span>
+                        </div>
+                    </div>
+            <div class="row">
+                <button class="btn w-100 text-white primery-bg m-2 text-uppercase" (click)="saveLeave()" type="button"> {{isSaving? 'Saving...' : 'Apply Leave'}}</button>
+            </div>
+               </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <h5 class="primery-color p-2 text-uppercase">Leave List</h5>
+                </div>
+                <p *ngIf="deletedMsg">
+                        <ngb-alert>
+                           Successully Deleted!
+                        </ngb-alert>
+                    </p>
+                <div class="row">
+                    <ng-container *ngFor="let leave of leaveData">
+                        <div class="mx-2 p-2 list-with-border d-flex w-100" *ngIf="leave?.empCode == loggedUser.id || leave?.approver == loggedUser.id">
+                                <div class="col-6">
+                                    <p class="m-0">{{filter(userData, leave?.empCode)[0]?.name}}</p>
+                                    <p class="small mb-1 secondary-color">{{filter(leaveTypeData, leave?.leaveType)[0]?.leaveCategory}}</p>
+                                </div>
+                                <div class="col-6"> 
+                                    <p class="m-0">{{leave?.noOfLeave}} Day
+                                    <button type="button" (click)="action(leave, 1)" [disabled]="leave?.status == 1" *ngIf="leave?.empCode != loggedUser.id" class="action-btn btn btn-success btn-sm float-right">Approve</button>
+                                    <i *ngIf="leave?.empCode == loggedUser.id" class="fas fa-trash-alt float-right" (click)="deleteleave(leave?.id)"></i></p>
+                                    <p class="small mb-1 secondary-color">{{leaveStatus[leave?.status]}}
+                                        <button type="button" (click)="action(leave, 2)" [disabled]="leave?.status == 2" *ngIf="leave?.empCode != loggedUser.id" class="action-btn btn btn-danger btn-sm float-right">Cancel</button>
+                                    </p>
+                                </div>
+                            </div>
+                    </ng-container>
+                    <div class="w-100 text-center p-5 primery-color" *ngIf="!leaveData?.length">No Data Found</div>
+                </div>
+            </div>
+        </div>
+    </div>

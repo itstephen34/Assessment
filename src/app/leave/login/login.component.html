@@ -1,0 +1,23 @@
+<div class="login-form p-3" [formGroup] = "loginForm">
+    <h3 class="text-center text-bold text-uppercase">Login</h3>
+    <p *ngIf="loginFaileddMsg">
+            <ngb-alert>
+               Incorret Login
+            </ngb-alert>
+        </p>
+    <div class="form-group">
+      <label for="empCode">Emp ID:</label>
+      <input type="empCode" class="form-control" placeholder="Emp ID" formControlName="empCode" id="empCode">
+      <span *ngIf="(loginForm.get('empCode').value == '' && loginForm.get('empCode').touched) || (isSubmitted && loginForm.get('empCode').invalid)" class="invalid-feedback text-danger d-block ">
+            Enter Emp ID
+        </span>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" placeholder="Enter password" formControlName="password" id="password">
+      <span *ngIf="(loginForm.get('password').value == '' && loginForm.get('password').touched) || (isSubmitted && loginForm.get('password').invalid)" class="invalid-feedback text-danger d-block ">
+            Enter Password
+        </span>
+    </div>
+    <button type="submit" class="btn w-100 primery-bg text-white" (click)=" login()">Submit</button>
+</div>

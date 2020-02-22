@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="row" [formGroup]="leaveTypeForm">
+        <div class="col-6 border-right">
+           <h5 class="primery-color p-2 text-uppercase">Add a new Leave Category</h5>
+            <p *ngIf="savedMsg">
+                <ngb-alert>
+                   Successully Saved!
+                </ngb-alert>
+            </p>
+           <div class="p-4">
+           <div class="form-group row">
+            <label for="inputPassword" class="col-sm-4 col-form-label text-uppercase">Leave Category <span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" formControlName="leaveCategory"  class="form-control" id="leaveCategory" placeholder="Leave Category">
+                <span *ngIf="(leaveTypeForm.get('leaveCategory').value == '' && leaveTypeForm.get('leaveCategory').touched) || (isSubmitted && leaveTypeForm.get('leaveCategory').invalid)" class="invalid-feedback text-danger d-block ">
+                    Enter the Leave Category
+                </span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword" class="col-sm-4 col-form-label text-uppercase">Leave Code <span class="text-danger">*</span></label>
+            <div class="col-sm-8">
+                <input type="text"  formControlName="leaveCode" class="form-control" id="leaveCode" placeholder="Leave Code">
+                <span *ngIf="(leaveTypeForm.get('leaveCode').value == '' && leaveTypeForm.get('leaveCode').touched) || (isSubmitted && leaveTypeForm.get('leaveCode').invalid)" class="invalid-feedback text-danger d-block ">
+                        Enter the Leave Code
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn w-100 text-white primery-bg m-2 text-uppercase" (click)="saveLeaveType()" type="button"> {{isSaving? 'Saving...' : 'Save LEAVE CATEGORY'}}</button>
+        </div>
+           </div>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <h5 class="primery-color p-2 text-uppercase">Leave Category List</h5>
+            </div>
+            <p *ngIf="deletedMsg">
+                    <ngb-alert>
+                       Successully Deleted!
+                    </ngb-alert>
+                </p>
+            <div class="row">
+                <div class="mx-2 p-2 list-with-border w-100 " *ngFor="let leaveType of leaveTypeData">
+                    {{leaveType.leaveCategory}} <i class="fas fa-trash-alt float-right" (click)="deleteLeaveType(leaveType.id)"></i>
+                </div>
+                <div class="w-100 text-center p-5 primery-color" *ngIf="!leaveTypeData?.length">No Data Found</div>
+            </div>
+        </div>
+    </div>
+</div>

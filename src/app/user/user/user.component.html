@@ -1,0 +1,83 @@
+<div class="container-fluid">
+        <div class="row" [formGroup]="userForm">
+            <div class="col-6 border-right">
+               <h5 class="primery-color p-2 text-uppercase">Add a new User</h5>
+                <p *ngIf="savedMsg">
+                    <ngb-alert>
+                       Successully Saved!
+                    </ngb-alert>
+                </p>
+               <div class="p-4">
+               <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label text-uppercase">Name <span class="text-danger">*</span></label>
+                <div class="col-sm-8">
+                    <input type="text" formControlName="name"  class="form-control" id="name" placeholder="Name">
+                    <span *ngIf="(userForm.get('name').value == '' && userForm.get('name').touched) || (isSubmitted && userForm.get('name').invalid)" class="invalid-feedback text-danger d-block ">
+                        Enter The Name
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-4 col-form-label text-uppercase">Password <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                        <input type="text" formControlName="password"  class="form-control" id="password" placeholder="Password">
+                        <span *ngIf="(userForm.get('password').value == '' && userForm.get('password').touched) || (isSubmitted && userForm.get('password').invalid)" class="invalid-feedback text-danger d-block ">
+                            Enter The password
+                        </span>
+                    </div>
+                </div>
+            
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label text-uppercase">Emp Code <span class="text-danger">*</span></label>
+                <div class="col-sm-8">
+                    <input type="text"  formControlName="empCode" class="form-control" id="empCode" placeholder="Emp Code">
+                    <span *ngIf="(userForm.get('empCode').value == '' && userForm.get('empCode').touched) || (isSubmitted && userForm.get('empCode').invalid)" class="invalid-feedback text-danger d-block ">
+                            Enter the Emp Code
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-4 col-form-label text-uppercase">Mobile <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                        <input type="text"  formControlName="mobile" class="form-control" id="mobile" placeholder="Mobile">
+                        <span *ngIf="(userForm.get('mobile').value == '' && userForm.get('mobile').touched) || (isSubmitted && userForm.get('mobile').invalid)" class="invalid-feedback text-danger d-block ">
+                                Enter the Mobile
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label text-uppercase">Role <span class="text-danger">*</span></label>
+                        <div class="col-sm-8">
+                            <select class="form-control" formControlName="role" id="sel1">
+                                <option value="0">Select Role</option>
+                                <option *ngFor="let role of roles" [value]="role.id" >{{role.roleName}}</option>
+                            </select>
+                            <span *ngIf="(userForm.get('role').value == '' && userForm.get('role').touched) || (isSubmitted && userForm.get('role').invalid)" class="invalid-feedback text-danger d-block ">
+                                    Enter the Role
+                            </span>
+                        </div>
+                    </div>
+            <div class="row">
+                <button class="btn w-100 text-white primery-bg m-2 text-uppercase" (click)="saveUser()" type="button"> {{isSaving? 'Saving...' : 'Save USEr'}}</button>
+            </div>
+               </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <h5 class="primery-color p-2 text-uppercase">User List</h5>
+                </div>
+                <p *ngIf="deletedMsg">
+                        <ngb-alert>
+                           Successully Deleted!
+                        </ngb-alert>
+                    </p>
+                <div class="row">
+                    <div class="mx-2 p-2 list-with-border d-flex w-100 " *ngFor="let user of userData">
+                        <div class="col-6">{{user?.name}}</div>
+                        <div class="col-6">{{filterRole(user?.role)[0]?.roleName}}  <i class="fas fa-trash-alt float-right" (click)="deleteUser(user.id)"></i></div>
+                    </div>
+                    <div class="w-100 text-center p-5 primery-color" *ngIf="!userData?.length">No Data Found</div>
+                </div>
+            </div>
+        </div>
+    </div>

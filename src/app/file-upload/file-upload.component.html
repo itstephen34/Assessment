@@ -1,0 +1,12 @@
+<div class="uploadfilecontainer" *ngIf="!fileListData?.length > 0"  (click)="fileInput.click()" appDragFiles (onFileDropped)="uploadFile($event)">
+        <input hidden type="file" #fileInput id="fileInput"  multiple (change)="uploadFile($event.target.files)">
+</div>
+<ng-container *ngIf="fileListData?.length > 0">
+        <div class="col-6 col-md-offset-3 filepreview-container">
+                <div class="row">
+                        <div class="mx-2 p-2 list-with-border w-100 "*ngFor="let fileDetails of fileListData">
+                                {{fileDetails.name}} <i class="fas fa-trash-alt float-right" (click)="deleteFile(fileDetails.index)"></i>
+                        </div>
+                </div>
+        </div>
+</ng-container>

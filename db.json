@@ -1,0 +1,116 @@
+{
+  "leaveType": [
+    {
+      "leaveCategory": "Sick Leave/Medical Leave",
+      "leaveCode": "SickLeaveMedicalLeave",
+      "id": 2
+    },
+    {
+      "leaveCategory": "Casual Leave",
+      "leaveCode": "CasualLeave",
+      "id": 3
+    },
+    {
+      "leaveCategory": "Earned Leave",
+      "leaveCode": "EarnedLeave",
+      "id": 4
+    },
+    {
+      "leaveCategory": "Maternity Leave",
+      "leaveCode": "MaternityLeave",
+      "id": 5
+    },
+    {
+      "leaveCategory": "Leave without pay",
+      "leaveCode": "Leavewithoutpay",
+      "id": 6
+    },
+    {
+      "leaveCategory": "Paternity leave",
+      "leaveCode": "PaternityLeave",
+      "id": 7
+    }
+  ],
+  "users": [
+    {
+      "name": "Stephen Raj",
+      "empCode": "Step1",
+      "role": "1",
+      "mobile": "999999999",
+      "id": 2,
+      "password": "test123"
+    },
+    {
+      "name": "Albin",
+      "empCode": "A1",
+      "role": "1",
+      "mobile": "123456789",
+      "password": "alnin123",
+      "id": 3
+    },
+    {
+      "name": "Ajith",
+      "empCode": "ce1",
+      "role": "2",
+      "mobile": "123",
+      "password": "123",
+      "id": 4
+    },
+    {
+      "name": "Vijay",
+      "empCode": "ce12",
+      "role": "4",
+      "mobile": "1234",
+      "password": "1234567",
+      "id": 5
+    }
+  ],
+  "roles": [
+    {
+      "roleName": "Developer",
+      "roleCode": "dev",
+      "id": 1
+    },
+    {
+      "roleName": "Manager",
+      "roleCode": "Manager",
+      "id": 2
+    },
+    {
+      "roleName": "Tester",
+      "roleCode": "Tester",
+      "id": 3
+    },
+    {
+      "roleName": "Senior Manager",
+      "roleCode": "Senior Manager",
+      "id": 4
+    }
+  ],
+  "leave": [
+    {
+      "leaveType": "2",
+      "noOfLeave": 1,
+      "approver": "3",
+      "empCode": 2,
+      "status": 0,
+      "id": 1
+    },
+    {
+      "leaveType": "3",
+      "noOfLeave": 1,
+      "approver": "2",
+      "empCode": 3,
+      "status": 2,
+      "id": 2
+    },
+    {
+      "leaveType": "2",
+      "noOfLeave": 1,
+      "approver": "5",
+      "empCode": 4,
+      "status": 0,
+      "id": 3
+    }
+  ]
+}
